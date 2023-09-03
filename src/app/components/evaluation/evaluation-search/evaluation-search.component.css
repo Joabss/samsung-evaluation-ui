@@ -1,0 +1,47 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+.middle {
+    vertical-align: bottom;
+
+}
+
+.btn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.table-responsive {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+table {
+    align-items: center;
+}
+
+.table-responsive td,
+.table-responsive th {
+    height: 35px;
+}
+
+.table-responsive thead {
+    float: left;
+}
+
+.table-responsive tbody {
+    width: auto;
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }

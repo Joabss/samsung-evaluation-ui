@@ -1,0 +1,101 @@
+<mat-card class="body">
+    <mat-card-header class="title">
+        <mat-card-title>Search Criteria</mat-card-title>
+    </mat-card-header>
+    <form>
+        <div class="row">
+            <mat-form-field class="col-sm-3">
+                <input matInput placeholder="Document Number" [(ngModel)]="filter.documentNumber" name="documentNumber">
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-3 middle">
+                <mat-label>Selecione</mat-label>
+                <mat-select name="currencyDesc" [(ngModel)]="filter.currencyCode">
+                    <mat-option *ngFor="let currency of currencys" [value]="currency.currencyCode">
+                        {{currency.currencyDesc}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <label>Documento Date</label>
+            <mat-form-field color="accent" class="col-sm-2">
+                <input matInput [matDatepicker]="picker1" name="documentDateStart"
+                    [(ngModel)]="filter.documentDateStart">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <label>~</label>
+            <mat-form-field color="accent" class="col-sm-2">
+                <input matInput [matDatepicker]="picker2" name="documentDateEnd" [(ngModel)]="filter.documentDateEnd">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="row btn">
+            <button mat-raised-button (click)="search()" color="primary">
+                Search
+            </button>
+            <button mat-raised-button (click)="clean()" color="warn">
+                Clean
+            </button>
+        </div>
+    </form>
+</mat-card>
+
+<mat-card class="body">
+    <mat-card-header class="title">
+        <mat-card-title>Self Evaluation Results</mat-card-title>
+    </mat-card-header>
+
+    <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource" >
+            <ng-container matColumnDef="documentNumber">
+                <th mat-header-cell *matHeaderCellDef>Document Number</th>
+                <td mat-cell *matCellDef="let row">{{ row.documentNumber}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="documentDate">
+                <th mat-header-cell *matHeaderCellDef>Document Date</th>
+                <td mat-cell *matCellDef="let row">{{ row.documentDate }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="currencyCode">
+                <th mat-header-cell *matHeaderCellDef>Currency Code</th>
+                <td mat-cell *matCellDef="let row">{{ row.currencyCode}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="currencyDesc">
+                <th mat-header-cell *matHeaderCellDef>Currency Desc</th>
+                <td mat-cell *matCellDef="let row">{{ row.currencyDesc}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="documentValue">
+                <th mat-header-cell *matHeaderCellDef>Document Value</th>
+                <td mat-cell *matCellDef="let row">{{ row.documentValue}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="valueUSD">
+                <th mat-header-cell *matHeaderCellDef>Value USD</th>
+                <td mat-cell *matCellDef="let row">{{ row.valueUSD}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="valuePEN">
+                <th mat-header-cell *matHeaderCellDef>Value PEN</th>
+                <td mat-cell *matCellDef="let row">{{ row.valuePEN}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="valueBRL">
+                <th mat-header-cell *matHeaderCellDef>Value BRL</th>
+                <td mat-cell *matCellDef="let row">{{ row.valueBRL}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10,5,  20]" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</mat-card>
